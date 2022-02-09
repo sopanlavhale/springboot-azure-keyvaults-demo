@@ -1,0 +1,29 @@
+#spring:
+#  datasource:
+#    url: jdbc:sqlserver://demoencrytion.database.windows.net:1433;database=demoencrytion;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+#    username: demoencrytion
+#    password: Password@1
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#      dialect : org.hibernate.dialect.SQLServer2012Dialect
+
+
+
+spring:
+  data:    mongodb:      database: azure-mongo-db
+      uri: ${spring-data-mongo-uri}
+
+azure:
+  keyvault:
+    enabled: true
+    uri: https://spring-azure-demo.vault.azure.net/
+    client-id: 368c968f-707e-4583-a503-d32bfb57684d
+    client-key: pMh7Q~tkE6.hxWKVG1Ho3oPjushbq0hPE5s6U
+    tenant-id: 9d16c0e6-6f00-473a-9471-16ac116587b5
+    token-acquire-timeout-secounds: 60
+    refresh-interval: 1800000
+
+server:
+  port: 9191
