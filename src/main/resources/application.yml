@@ -24,6 +24,3 @@ azure:
     tenant-id: 9d16c0e6-6f00-473a-9471-16ac116587b5
     token-acquire-timeout-secounds: 60
     refresh-interval: 1800000
-
-server:
-  port: 9191
