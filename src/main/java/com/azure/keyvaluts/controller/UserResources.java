@@ -22,16 +22,16 @@ public class UserResources {
   // @Autowired
   // private UserRepository userRepository;
 
-  @Value("${server.ssl.key-store-type}")
+  @Value("${com.azure.keyvaults.keyStoreType}")
   private String storeType;
 
-  @Value("${server.ssl.key-store}")
+  @Value("${com.azure.keyvaults.keyStorePath}")
   private String storePath;
 
-  @Value("${server.ssl.key-store-password}")
+  @Value("${com.azure.keyvaults.password}")
   private String password;
 
-  @Value("${server.ssl.key-alias}")
+  @Value("${com.azure.keyvaults.alias}")
   private String alias;
 
   @Autowired
