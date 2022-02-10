@@ -34,7 +34,7 @@ public class SymmtricResources {
        Encryption encryption = new Encryption();
       System.out.println("encyption key is " + keys);
       String iv=keys;
-    
+    List<SymmetricUser> symmetricList = new LinkedList<SymmetricUser>();
       for (DataValues user : userRequest.getDataValues()) { // O(n)
         SymmetricUser userDetails = new SymmetricUser();
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.FIRSTNAME.value())) {
@@ -93,7 +93,7 @@ public class SymmtricResources {
         } else {
           userDetails.setPin(user.getPin());
         }
-        
+        symmetricList.add(userDetails);
         // use batch processing spring for large data to save.
         if (this.symmetricUserRepository.save(userDetails) == null) {
           System.out.println("Failed to save");
@@ -101,7 +101,7 @@ public class SymmtricResources {
 
       }
 
-      return ResponseEntity.ok().body(userRequest);
+      return ResponseEntity.ok().body(symmetricList);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -185,6 +185,4 @@ public class SymmtricResources {
 
     return null;
   }
-
-
 }
