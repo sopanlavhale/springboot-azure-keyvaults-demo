@@ -12,11 +12,9 @@ import com.azure.keyvaluts.common.DBConstants;
 import com.azure.keyvaluts.common.Encryption;
 import com.azure.keyvaluts.common.SupportedEncoding;
 import com.azure.keyvaluts.entity.SymmetricUser;
-import com.azure.keyvaluts.entity.UserDetails;
 import com.azure.keyvaluts.model.DataValues;
 import com.azure.keyvaluts.model.UserRequest;
 import com.azure.keyvaluts.repository.SymmetricUserRepository;
-import com.azure.keyvaluts.repository.UserDetailsRepository;
 
 
 @Component("symmtricResources")
@@ -49,7 +47,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.LASTNAME.value())) {
           String rawValue = user.getLastName();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setLastName(encyptedValue);
           userDetails.setLastName(encyptedValue);
         } else {
           userDetails.setLastName(user.getLastName());
@@ -57,7 +54,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.EMAIL.value())) {
           String rawValue = user.getEmail();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setEmail(encyptedValue);
           userDetails.setEmail(encyptedValue);
         } else {
           userDetails.setEmail(user.getEmail());
@@ -65,7 +61,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.MOBILE.value())) {
           String rawValue = user.getMobile();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setMobile(encyptedValue);
           userDetails.setMobile(encyptedValue);
         } else {
           userDetails.setMobile(user.getMobile());
@@ -73,7 +68,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.PASSWORD.value())) {
           String rawValue = user.getPassword();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setPassword(encyptedValue);
           userDetails.setPassword(encyptedValue);
         } else {
           userDetails.setPassword(user.getPassword());
@@ -81,7 +75,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.ACCOUNTNUMBER.value())) {
           String rawValue = user.getAccountNumber();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setAccountNumber(encyptedValue);
           userDetails.setAccountNumber(encyptedValue);
         } else {
           userDetails.setAccountNumber(user.getAccountNumber());
@@ -89,7 +82,6 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.CARDNUMBER.value())) {
           String rawValue = user.getCardNumber();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setCardNumber(encyptedValue);
           userDetails.setCardNumber(encyptedValue);
         } else {
           userDetails.setCardNumber(user.getCardNumber());
@@ -97,20 +89,17 @@ public class SymmtricResources {
         if (userRequest.getEncryptdKey().contains(DBConstants.FieldsName.PIN.value())) {
           String rawValue = user.getPin();
           String encyptedValue = encryption.encryptData(rawValue, keys.getBytes(), iv.getBytes(), encodealgo, encryptalgo);
-          user.setPin(encyptedValue);
           userDetails.setPin(encyptedValue);
         } else {
           userDetails.setPin(user.getPin());
         }
-
+        
+        // use batch processing spring for large data to save.
         if (this.symmetricUserRepository.save(userDetails) == null) {
           System.out.println("Failed to save");
         }
 
       }
-      // TODO - > we can save to db also
-
-      // n time
 
       return ResponseEntity.ok().body(userRequest);
     } catch (Exception e) {
