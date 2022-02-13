@@ -37,19 +37,10 @@ public class UserResources {
   @Autowired
   private UserDetailsRepository userDetailsRepository;
 
-  @Value("${encryptionkey}")
-  private String keys;
-  
-  @Value("${symmetric-key}")
-  private String symmetrickey;
-
   public ResponseEntity saveEncryptedData(UserRequest userRequest) {
     try {
       KeyPair keyPair = RsaEncrytionDecrytion.getKeyPairFromKeyStore(
           resourceLoader.getResource(storePath), password, alias, storeType);
-      
-      System.out.println("encyption key is " + keys);
-      System.out.println("symmetrickey key is " + symmetrickey);
       List<UserDetails> userList = new LinkedList<UserDetails>();
       for (DataValues user : userRequest.getDataValues()) { // O(n)
         UserDetails userDetails = new UserDetails();
