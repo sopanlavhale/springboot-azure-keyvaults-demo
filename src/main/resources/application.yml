@@ -25,7 +25,7 @@ azure:
     token-acquire-timeout-secounds: 60
     refresh-interval: 1800000
 
-server:  port: 8443
+#server:#  port: 8443
 #  ssl:
 #    enabled: true#    key-store-type: PKCS12
 #    key-alias: alias
