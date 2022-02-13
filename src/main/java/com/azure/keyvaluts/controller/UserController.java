@@ -15,7 +15,7 @@ import com.azure.keyvaluts.repository.UserDetailsRepository;
 import com.azure.keyvaluts.repository.UserRepository;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1/asymmetric")
 public class UserController {
 
   @Autowired
@@ -31,11 +31,11 @@ public class UserController {
   public User save(@RequestBody User userRequest) {
     return this.userRepository.save(userRequest);
   }
-
-  @GetMapping("/users")
-  public List<User> getUsers() {
-    return this.userRepository.findAll();
-  }
+//
+//  @GetMapping("/user/users")
+//  public List<User> getUsers() {
+//    return this.userRepository.findAll();
+//  }
   
   @PostMapping("/encrypt")
   public ResponseEntity userencryptRequest(@RequestBody UserRequest userRequest) {
@@ -55,7 +55,7 @@ public class UserController {
 
   }
   
-  @GetMapping("/userDetails")
+  @GetMapping("/users")
   public List<UserDetails> getUserDetails() {
     return this.userDetailsRepository.findAll();
   }
