@@ -27,16 +27,16 @@ public class UserController {
   @Autowired
   private UserDetailsRepository userDetailsRepository;
 
+  @GetMapping("/systeminfo")
+  public String healthcheck() {
+    return "Application is up";
+  }
+  
   @PostMapping("/addUser")
   public User save(@RequestBody User userRequest) {
     return this.userRepository.save(userRequest);
   }
-//
-//  @GetMapping("/user/users")
-//  public List<User> getUsers() {
-//    return this.userRepository.findAll();
-//  }
-  
+
   @PostMapping("/encrypt")
   public ResponseEntity userencryptRequest(@RequestBody UserRequest userRequest) {
       if (userRequest == null) {
